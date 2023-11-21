@@ -6,45 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold|italic"
-        android:visibility="gone"
-        android:textSize="20sp"
-        android:textColor="#808080"
-        android:textAlignment="center"
-        android:id="@+id/result"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/press_the_below_button_to_start_nscanning_your_qr_code"
-        android:textStyle="bold|italic"
-        android:textSize="24sp"
-        android:textColor="#808080"
-        android:textAlignment="center"
-        android:id="@+id/resultHeader"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/tabLayout"
+        android:background="#448EE4"
+        app:tabIconTint="@drawable/item_selector"
+        app:tabTextColor="@drawable/item_selector"
+        app:tabMode="fixed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:tint="@color/white"
-        android:src="@drawable/baseline_qr_code_scanner_24"
-        app:shapeAppearance="@style/MaterialAlertDialog.Material3"
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/frame"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/scan"
-        android:backgroundTint="#0083A3"
-        android:layout_marginBottom="30dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

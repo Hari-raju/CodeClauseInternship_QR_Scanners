@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="press_the_below_button_to_start_picking_ur_qr_code">Press the below button to pick\n your QR code from Gallery</string>
     <string name="press_the_below_button_to_start_nscanning_your_qr_code">Press the below button to start\nScanning your QR code</string>
+    <string name="qr_details">QR Details :</string>
 </resources>
