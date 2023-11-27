@@ -34,8 +34,9 @@ public class Result_QR extends AppCompatActivity {
         resultBinding = ActivityResultBinding.inflate(getLayoutInflater());
         setContentView(resultBinding.getRoot());
         resultBinding.get.setVisibility(View.VISIBLE);
+        //Initializing ml kits scanneroption
         scannerOptions = new BarcodeScannerOptions.Builder()
-                .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+                .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
                 .build();
         scanner = BarcodeScanning.getClient(scannerOptions);
         imageUrl = Uri.parse(getIntent().getStringExtra("url"));
@@ -49,6 +50,7 @@ public class Result_QR extends AppCompatActivity {
     private void getQR_data() {
         resultBinding.progress.setVisibility(View.VISIBLE);
         try {
+            //Processing the barcodes present in the image
             InputImage image = InputImage.fromFilePath(this, imageUrl);
             Task<List<Barcode>> result = scanner.process(image)
                     .addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
@@ -57,7 +59,9 @@ public class Result_QR extends AppCompatActivity {
                             if (barcodes.isEmpty()) {
                                 resultBinding.progress.setVisibility(View.GONE);
                                 Toast.makeText(Result_QR.this, "Empty", Toast.LENGTH_SHORT).show();
-                            } else
+                            }
+                            //If barcode is not empty then we proceed to decoding
+                            else
                                 decodeData(barcodes);
                         }
                     })
@@ -81,6 +85,7 @@ public class Result_QR extends AppCompatActivity {
 
             int valueType = barcode.getValueType();
             switch (valueType) {
+                //for wifi
                 case Barcode.TYPE_WIFI:
                     Barcode.WiFi typeWifi = barcode.getWifi();
                     resultBinding.resultHead.setText("Wifi Details");
@@ -89,6 +94,7 @@ public class Result_QR extends AppCompatActivity {
                     String encryption = String.valueOf(typeWifi.getEncryptionType());
                     resultBinding.results.setText(String.format("Results\n\nRaw Values : %s\nSSID : %s\nPassword : %s\nEncryption : %s", rawValue, ssid, password, encryption));
                     break;
+                    //for mail
                 case Barcode.TYPE_EMAIL:
                     Barcode.Email typeEmail = barcode.getEmail();
                     resultBinding.resultHead.setText("Email Details");
@@ -97,6 +103,7 @@ public class Result_QR extends AppCompatActivity {
                     String body = typeEmail.getBody();
                     resultBinding.results.setText(String.format("Results\n\nRaw Values : %s\nAddress : %s\nSubject : %s\nBody : %s", rawValue, Address, Subject, body));
                     break;
+                    //for url
                 case Barcode.TYPE_URL:
                     Barcode.UrlBookmark typeUrl = barcode.getUrl();
                     resultBinding.resultHead.setText("Url Details");
@@ -108,6 +115,7 @@ public class Result_QR extends AppCompatActivity {
                         resultBinding.results.setText(String.format("Results\n\nRaw Values : %s\nUrl : %s", rawValue, url));
                     }
                     break;
+                    //for phone number
                 case Barcode.TYPE_PHONE:
                     Barcode.Phone typePhone = barcode.getPhone();
                     resultBinding.resultHead.setText("Phone Details");
@@ -115,6 +123,7 @@ public class Result_QR extends AppCompatActivity {
                     String number = typePhone.getNumber();
                     resultBinding.results.setText(String.format("Results\n\nRaw Values : %s\nType : %s\nNumber : %s", rawValue, type, number));
                     break;
+                    //for sms
                 case Barcode.TYPE_SMS:
                     Barcode.Sms typeSms = barcode.getSms();
                     resultBinding.resultHead.setText("SMS Details");
@@ -122,6 +131,7 @@ public class Result_QR extends AppCompatActivity {
                     String number1 = typeSms.getPhoneNumber();
                     resultBinding.results.setText(String.format("Results\n\nRaw Values : %s\nMessage : %s\nNumber : %s", rawValue, message, number1));
                     break;
+                    //for contact sharing qr
                 case Barcode.TYPE_CONTACT_INFO:
                     Barcode.ContactInfo typeContact = barcode.getContactInfo();
                     resultBinding.resultHead.setText("Contact Details");
@@ -133,6 +143,7 @@ public class Result_QR extends AppCompatActivity {
                     String email = String.valueOf(typeContact.getEmails().get(0));
                     resultBinding.results.setText(String.format("Results\n\nRaw Values : %s\nName : %s\nTitle : %s\nOrganization : %s\nPhone : %s\nUrl : %s\nEmail : %s", rawValue, name, title1, org, phone, url1, email));
                     break;
+                    //for location
                 case Barcode.TYPE_GEO:
                     Barcode.GeoPoint typeGeo = barcode.getGeoPoint();
                     resultBinding.resultHead.setText("Geo Details");

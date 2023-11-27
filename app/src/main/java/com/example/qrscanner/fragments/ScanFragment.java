@@ -26,20 +26,15 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ScanFragment extends Fragment {
-
-    public ScanFragment() {
-    }
-
+    public ScanFragment() {}
     private View view;
     private FloatingActionButton camera;
     private MaterialButton scan,rescan;
     private ImageView qr_code;
     private TextView whatTodo;
     private Uri imageUrl = null;
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_scan, container, false);
         camera = view.findViewById(R.id.scan_camera);
         whatTodo=view.findViewById(R.id.whatTodo);
@@ -50,7 +45,6 @@ public class ScanFragment extends Fragment {
         Listeners();
         return view;
     }
-
     private void Listeners(){
         scan.setOnClickListener(v->{
             if(imageUrl==null){
@@ -74,7 +68,7 @@ public class ScanFragment extends Fragment {
             init();
         });
     }
-
+    //In this method we are allowing users to take qr pictures
     private void init(){
         whatTodo.setVisibility(View.VISIBLE);
         camera.setVisibility(View.VISIBLE);
@@ -83,6 +77,7 @@ public class ScanFragment extends Fragment {
         rescan.setVisibility(View.GONE);
     }
 
+    //In this method we are allowing users to scan the taken Qr picture
     private void Scan(){
         whatTodo.setVisibility(View.GONE);
         camera.setVisibility(View.GONE);
@@ -90,17 +85,16 @@ public class ScanFragment extends Fragment {
         scan.setVisibility(View.VISIBLE);
         rescan.setVisibility(View.VISIBLE);
     }
+    //Starting Camera so that users can take pictures
     private void scanImage(){
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.Images.Media.TITLE,"QR title");
         contentValues.put(MediaStore.Images.Media.DESCRIPTION,"QR description");
-
         imageUrl=MainActivity.getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUrl);
         camLauncher.launch(intent);
     }
-
     private final ActivityResultLauncher<Intent> camLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override

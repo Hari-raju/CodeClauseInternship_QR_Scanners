@@ -26,31 +26,24 @@ import com.example.qrscanner.adapters.TabAdapter;
 import com.example.qrscanner.databinding.ActivityMainBinding;
 import com.example.qrscanner.fragments.PickQRFragment;
 import com.example.qrscanner.fragments.ScanFragment;
-
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mainBinding;
     private static Context context;
     private static Activity activity;
     private String[] permission1;
     private String[] permission2;
-
-
     public static Context getContext() {
         return context;
     }
-
     public static void setContext(Context context) {
         MainActivity.context = context;
     }
-
     public static Activity getActivity() {
         return activity;
     }
-
     public static void setActivity(Activity context) {
         MainActivity.activity = context;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             reqPermissions();
         }
     }
-
     private boolean checkPermissions() {
         boolean camera, storage;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -78,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return camera && storage;
     }
-
     private void reqPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             ActivityCompat.requestPermissions(this, permission2, 100);
@@ -113,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
     private void reqStorage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             try {
@@ -129,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
     ActivityResultLauncher<Intent> reqLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult o) {
@@ -142,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     });
-
     private void setAdapter() {
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         adapter.addFragments(new ScanFragment(), "Scan");

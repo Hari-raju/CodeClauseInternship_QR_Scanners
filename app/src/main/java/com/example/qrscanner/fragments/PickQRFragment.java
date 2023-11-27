@@ -70,6 +70,7 @@ public class PickQRFragment extends Fragment {
 
     }
 
+    //Allowing users to upload Qr picture
     private void init(){
         whatTodo.setVisibility(View.VISIBLE);
         upload.setVisibility(View.VISIBLE);
@@ -78,6 +79,7 @@ public class PickQRFragment extends Fragment {
         rescan.setVisibility(View.GONE);
     }
 
+    //Allowing users to scan the uploaded Qr picture
     private void Scan(){
         whatTodo.setVisibility(View.GONE);
         upload.setVisibility(View.GONE);
@@ -86,6 +88,7 @@ public class PickQRFragment extends Fragment {
         rescan.setVisibility(View.VISIBLE);
     }
 
+    //Starting file upload so that users can upload files
     private void uploadImage(){
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
