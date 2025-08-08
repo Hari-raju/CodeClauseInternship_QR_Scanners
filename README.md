@@ -21,8 +21,12 @@ It delivers quick scanning with high accuracy, even in low-light conditions.
 ---
 
 ## 🎥 Demo Video
-[![Watch the video](https://img.shields.io/badge/Watch%20Demo-Video-blue?style=for-the-badge)](PASTE_VIDEO_URL_HERE)
+[![Watch the video](https://img.shields.io/badge/Watch%20Demo-Video-blue?style=for-the-badge)](https://github.com/user-attachments/assets/b984be8d-c531-4901-9b11-a498a89db11b)
 
 ---
+
+
+
+
 
 
